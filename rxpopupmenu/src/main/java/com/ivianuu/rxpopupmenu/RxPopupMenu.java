@@ -74,24 +74,18 @@ public final class RxPopupMenu implements MaybeOnSubscribe<MenuItem> {
     @Override
     public void subscribe(final MaybeEmitter<MenuItem> e) throws Exception {
         // success on clicks
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (!e.isDisposed()) {
-                    e.onSuccess(item);
-                    e.onComplete();
-                }
-                return true;
+        popupMenu.setOnMenuItemClickListener(item -> {
+            if (!e.isDisposed()) {
+                e.onSuccess(item);
+                e.onComplete();
             }
+            return true;
         });
 
         // complete on dismiss
-        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
-            @Override
-            public void onDismiss(PopupMenu menu) {
-                if (!e.isDisposed()) {
-                    e.onComplete();
-                }
+        popupMenu.setOnDismissListener(__ -> {
+            if (!e.isDisposed()) {
+                e.onComplete();
             }
         });
 

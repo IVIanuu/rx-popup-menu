@@ -24,18 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         Button showPopupButton = findViewById(R.id.show_popup);
 
-        showPopupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        showPopupButton.setOnClickListener(view ->
                 popupDisposable = RxPopupMenu.create(view, R.menu.test_menu, Gravity.TOP)
-                        .subscribe(new Consumer<MenuItem>() {
-                            @Override
-                            public void accept(MenuItem menuItem) throws Exception {
-                                Toast.makeText(MainActivity.this, menuItem.getTitle() + " Clicked!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        });
+                        .subscribe(menuItem
+                                -> Toast.makeText(MainActivity.this, menuItem.getTitle() + " Clicked!", Toast.LENGTH_SHORT).show()));
     }
 
     @Override
