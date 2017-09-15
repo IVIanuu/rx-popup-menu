@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
         applicationId "com.ivianuu.rxpopupmenu.sample"
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -19,7 +20,7 @@ android {
 
 dependencies {
     // Android support
-    implementation 'com.android.support:appcompat-v7:26.0.2'
+    implementation rootProject.ext.supportAppCompat
 
     // RxPopupMenu
     implementation project(':rxpopupmenu')
