@@ -28,6 +28,7 @@ import io.reactivex.Maybe;
 import io.reactivex.MaybeEmitter;
 import io.reactivex.MaybeOnSubscribe;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Cancellable;
 
 /**
  * Rx popup menu
@@ -90,21 +91,7 @@ public final class RxPopupMenu implements MaybeOnSubscribe<MenuItem> {
         });
 
         // dismiss pop up on dispose
-        e.setDisposable(new Disposable() {
-            private boolean disposed;
-            @Override
-            public void dispose() {
-                if (!disposed) {
-                    disposed = true;
-                    popupMenu.dismiss();
-                }
-            }
-
-            @Override
-            public boolean isDisposed() {
-                return disposed;
-            }
-        });
+        e.setCancellable(popupMenu::dismiss);
 
         // show
         popupMenu.show();
