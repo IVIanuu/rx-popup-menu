@@ -27,8 +27,8 @@ import android.view.View;
 import io.reactivex.Maybe;
 import io.reactivex.MaybeEmitter;
 import io.reactivex.MaybeOnSubscribe;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Cancellable;
+
+import static com.ivianuu.preconditions.Preconditions.checkNotNull;
 
 /**
  * Rx popup menu
@@ -47,6 +47,7 @@ public final class RxPopupMenu implements MaybeOnSubscribe<MenuItem> {
     @CheckResult @NonNull
     public static Maybe<MenuItem> create(@NonNull View anchor,
                                          @MenuRes int menuRes) {
+        checkNotNull(anchor, "anchor == null");
         return create(anchor, menuRes, Gravity.NO_GRAVITY);
     }
 
@@ -57,6 +58,7 @@ public final class RxPopupMenu implements MaybeOnSubscribe<MenuItem> {
     public static Maybe<MenuItem> create(@NonNull View anchor,
                                          @MenuRes int menuRes,
                                          int gravity) {
+        checkNotNull(anchor, "anchor == null");
         PopupMenu popupMenu = new PopupMenu(anchor.getContext(), anchor);
         popupMenu.inflate(menuRes);
         popupMenu.setGravity(gravity);
@@ -69,6 +71,7 @@ public final class RxPopupMenu implements MaybeOnSubscribe<MenuItem> {
      */
     @CheckResult @NonNull
     public static Maybe<MenuItem> create(@NonNull PopupMenu popupMenu) {
+        checkNotNull(popupMenu, "popupMenu == null");
         return Maybe.create(new RxPopupMenu(popupMenu));
     }
 
