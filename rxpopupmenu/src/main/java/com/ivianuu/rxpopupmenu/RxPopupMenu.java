@@ -28,7 +28,7 @@ import io.reactivex.Maybe;
 import io.reactivex.MaybeEmitter;
 import io.reactivex.MaybeOnSubscribe;
 
-import static com.ivianuu.preconditions.Preconditions.checkNotNull;
+import static com.ivianuu.rxpopupmenu.Preconditions.checkNotNull;
 
 /**
  * Rx popup menu
