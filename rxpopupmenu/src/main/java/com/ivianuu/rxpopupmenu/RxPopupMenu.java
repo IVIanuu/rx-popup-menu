@@ -48,7 +48,18 @@ public final class RxPopupMenu implements MaybeOnSubscribe<MenuItem> {
     public static Maybe<MenuItem> create(@NonNull View anchor,
                                          @MenuRes int menuRes) {
         checkNotNull(anchor, "anchor == null");
-        return create(anchor, menuRes, Gravity.NO_GRAVITY);
+        return create(anchor, menuRes, MenuPreparer.NO_OP_PREPARER);
+    }
+
+    /**
+     * Emits on popup clicks
+     */
+    @CheckResult @NonNull
+    public static Maybe<MenuItem> create(@NonNull View anchor,
+                                         @MenuRes int menuRes,
+                                         @NonNull MenuPreparer preparer) {
+        checkNotNull(anchor, "anchor == null");
+        return create(anchor, menuRes, Gravity.NO_GRAVITY, preparer);
     }
 
     /**
@@ -58,9 +69,22 @@ public final class RxPopupMenu implements MaybeOnSubscribe<MenuItem> {
     public static Maybe<MenuItem> create(@NonNull View anchor,
                                          @MenuRes int menuRes,
                                          int gravity) {
+        return create(anchor, menuRes, gravity, MenuPreparer.NO_OP_PREPARER);
+    }
+
+    /**
+     * Emits on popup clicks
+     */
+    @CheckResult @NonNull
+    public static Maybe<MenuItem> create(@NonNull View anchor,
+                                         @MenuRes int menuRes,
+                                         int gravity,
+                                         @NonNull MenuPreparer preparer) {
         checkNotNull(anchor, "anchor == null");
+        checkNotNull(preparer, "preparer == null");
         PopupMenu popupMenu = new PopupMenu(anchor.getContext(), anchor);
         popupMenu.inflate(menuRes);
+        preparer.prepare(popupMenu.getMenu());
         popupMenu.setGravity(gravity);
 
         return create(popupMenu);
