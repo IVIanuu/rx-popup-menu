@@ -40,7 +40,7 @@ object RxPopupMenu {
     fun create(anchor: View,
                @MenuRes menuRes: Int,
                gravity: Int = Gravity.NO_GRAVITY,
-               preparer: (Menu) -> Unit = stubMenuPreparer
+               preparer: (Menu) -> Unit = menuPreparerStub
     ): Maybe<MenuItem> {
         val popupMenu = PopupMenu(anchor.context, anchor, gravity).apply {
             inflate(menuRes)
@@ -77,5 +77,4 @@ object RxPopupMenu {
 }
 
 /** no op preparer **/
-private val stubMenuPreparer: (Menu) -> Unit = {
-}
+private val menuPreparerStub: (Menu) -> Unit = {}

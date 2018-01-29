@@ -5,17 +5,16 @@ buildscript {
         minSdkVersion = 14
         compileSdkVersion = 27
         targetSdkVersion = 27
-        buildToolsVersion = '26.0.2'
 
-        kotlinVersion = '1.2.10'
+        kotlinVersion = '1.2.21'
         kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 
         mavenPlugin = 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
-        supportAppCompat = 'com.android.support:appcompat-v7:27.0.1'
+        supportAppCompat = 'com.android.support:appcompat-v7:27.0.2'
 
-        rxJava = 'io.reactivex.rxjava2:rxjava:2.1.7'
+        rxJava = 'io.reactivex.rxjava2:rxjava:2.1.8'
     }
     
     repositories {
