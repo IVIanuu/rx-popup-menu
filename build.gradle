@@ -12,7 +12,7 @@ buildscript {
 
         mavenPlugin = 'com.github.dcendents:android-maven-gradle-plugin:2.0'
 
-        supportAppCompat = 'com.android.support:appcompat-v7:27.0.2'
+        supportAppCompat = 'com.android.support:appcompat-v7:27.1.0'
 
         rxJava = 'io.reactivex.rxjava2:rxjava:2.1.8'
     }

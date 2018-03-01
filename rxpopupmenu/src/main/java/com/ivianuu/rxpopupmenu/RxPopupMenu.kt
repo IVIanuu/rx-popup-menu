@@ -16,8 +16,6 @@
 
 package com.ivianuu.rxpopupmenu
 
-import android.support.annotation.CheckResult
-import android.support.annotation.MenuRes
 import android.support.v7.widget.PopupMenu
 import android.view.Gravity
 import android.view.Menu
@@ -36,15 +34,14 @@ object RxPopupMenu {
      */
     @JvmStatic
     @JvmOverloads
-    @CheckResult
     fun create(anchor: View,
-               @MenuRes menuRes: Int,
+               menuRes: Int,
                gravity: Int = Gravity.NO_GRAVITY,
-               preparer: (Menu) -> Unit = menuPreparerStub
+               preparer: ((menu: Menu) -> Unit)? = null
     ): Maybe<MenuItem> {
         val popupMenu = PopupMenu(anchor.context, anchor, gravity).apply {
             inflate(menuRes)
-            preparer(this.menu)
+            preparer?.invoke(this.menu)
         }
 
         return create(popupMenu)
@@ -54,7 +51,6 @@ object RxPopupMenu {
      * Emits the clicked [MenuItem] or completes on dismiss
      */
     @JvmStatic
-    @CheckResult
     fun create(popupMenu: PopupMenu): Maybe<MenuItem> {
         return Maybe.create { e ->
             // success on clicks
@@ -75,6 +71,3 @@ object RxPopupMenu {
         }
     }
 }
-
-/** no op preparer **/
-private val menuPreparerStub: (Menu) -> Unit = {}
