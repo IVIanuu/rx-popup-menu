@@ -25,19 +25,18 @@ import android.view.View
 import io.reactivex.Maybe
 
 /**
- * Factory to create [Maybe]'s of [MenuItem] clicks
+ * Factory for reactive [PopupMenu]'s
  */
 object RxPopupMenu {
 
-    /**
-     * Emits the clicked [MenuItem] or completes on dismiss
-     */
+
     @JvmStatic
     @JvmOverloads
-    fun create(anchor: View,
-               menuRes: Int,
-               gravity: Int = Gravity.NO_GRAVITY,
-               preparer: ((menu: Menu) -> Unit)? = null
+    fun create(
+        anchor: View,
+        menuRes: Int,
+        gravity: Int = Gravity.NO_GRAVITY,
+        preparer: ((menu: Menu) -> Unit)? = null
     ): Maybe<MenuItem> {
         val popupMenu = PopupMenu(anchor.context, anchor, gravity).apply {
             inflate(menuRes)
@@ -47,16 +46,12 @@ object RxPopupMenu {
         return create(popupMenu)
     }
 
-    /**
-     * Emits the clicked [MenuItem] or completes on dismiss
-     */
     @JvmStatic
     fun create(popupMenu: PopupMenu): Maybe<MenuItem> {
         return Maybe.create { e ->
             // success on clicks
             popupMenu.setOnMenuItemClickListener { item ->
                 e.onSuccess(item)
-                e.onComplete()
                 true
             }
 

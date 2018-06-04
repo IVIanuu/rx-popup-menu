@@ -1,30 +1,13 @@
 buildscript {
 
-    ext {
-        androidPlugin = 'com.android.tools.build:gradle:3.0.1'
-        minSdkVersion = 14
-        compileSdkVersion = 27
-        targetSdkVersion = 27
-
-        kotlinVersion = '1.2.21'
-        kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
-
-        mavenPlugin = 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-
-        supportAppCompat = 'com.android.support:appcompat-v7:27.1.0'
-
-        rxJava = 'io.reactivex.rxjava2:rxjava:2.1.8'
-    }
-    
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath rootProject.ext.androidPlugin
-        classpath rootProject.ext.kotlinPlugin
-        classpath rootProject.ext.mavenPlugin
+        classpath Deps.androidGradlePlugin
+        classpath Deps.kotlinGradlePlugin
+        classpath Deps.mavenGradlePlugin
     }
 }
 
