@@ -29,18 +29,17 @@ import io.reactivex.Maybe
  */
 object RxPopupMenu {
 
-
     @JvmStatic
     @JvmOverloads
     fun create(
         anchor: View,
         menuRes: Int,
         gravity: Int = Gravity.NO_GRAVITY,
-        preparer: ((menu: Menu) -> Unit)? = null
+        onInit: ((menu: PopupMenu) -> Unit)? = null
     ): Maybe<MenuItem> {
         val popupMenu = PopupMenu(anchor.context, anchor, gravity).apply {
             inflate(menuRes)
-            preparer?.invoke(this.menu)
+            onInit?.invoke(this)
         }
 
         return create(popupMenu)
