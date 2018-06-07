@@ -12,12 +12,7 @@ android {
 }
 
 dependencies {
-    // Android Support
     implementation Deps.supportAppCompat
-
-    // Kotlin
     implementation Deps.kotlinStdLib
-
-    // RxContentObserver
     implementation project(':rxpopupmenu')
 }
